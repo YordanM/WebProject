@@ -13,7 +13,7 @@ namespace WebProject.Entities
         public int Id { get; set; }
         public string Tittle { get; set; }
         public string Genre { get; set; }
-        public string OwnerId { get; set; }
+        public int OwnerId { get; set; }
 
         [ForeignKey("OwnerId")]
         public virtual User Owner { get; set; }

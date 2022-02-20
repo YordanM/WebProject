@@ -10,14 +10,18 @@ namespace WebProject.Repositories
     public class WebProjectDbContext : DbContext
     {
         public DbSet<User> Users { get; set; }
-        /*public DbSet<Song> Songs { get; set; }
-        public DbSet<Playlist> Playlists { get; set; }*/
+        public DbSet<Song> Songs { get; set; }
+        public DbSet<Playlist> Playlists { get; set; }
+        public DbSet<SongToPlaylist> SongToPlaylists { get; set; }
+        public DbSet<PlaylistToUser> PlaylistToUsers { get; set; }
 
         public WebProjectDbContext()
         {
             this.Users = this.Set<User>();
-            /*this.Songs = this.Set<Song>();
-            this.Playlists = this.Set<Playlist>();*/
+            this.Songs = this.Set<Song>();
+            this.Playlists = this.Set<Playlist>();
+            this.SongToPlaylists = this.Set<SongToPlaylist>();
+            this.PlaylistToUsers = this.Set<PlaylistToUser>();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

@@ -11,7 +11,6 @@ namespace WebProject.Entities
     {
         [Key]
         public int Id { get; set; }
-        public List<Song> Songs { get; set; }
         public string Name { get; set; }
         public int OwnerId { get; set; }
 
