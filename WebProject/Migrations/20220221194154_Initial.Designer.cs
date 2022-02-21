@@ -10,7 +10,7 @@ using WebProject.Repositories;
 namespace WebProject.Migrations
 {
     [DbContext(typeof(WebProjectDbContext))]
-    [Migration("20220220212709_Initial")]
+    [Migration("20220221194154_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
