@@ -1,65 +1,122 @@
-﻿.container {
+﻿body{
+    margin:0;
+}
+.container {
     width: 100%;
     display: inline-block;
 }
 
-.header .title {
-    float: left;
+
+.header{
+    background-color: black;
+    color:white;
+    height: 85px;
+    padding: 0 10%;
 }
 
-.header .welcomeMsg {
-    float: right;
+    .header .title {
+        float: left;
+        border-top: solid 0.5px white;
+        border-bottom: solid 0.5px #7F8AF2;
+        border-radius: 45px;
+        text-shadow: 2px 2px #3A53E5;
+        margin-top: 2px;
+       
+    }
+
+.header .container{
+    display:block;
+    margin: 0;
+    padding: 0;
+    
 }
 
 .menu {
-    display: inline-block;
-    margin: 20px 0px;
+    margin: 0 0 0 30%;
+    padding: 0;
+    float:right;
 }
 
-    .menu li {
-        float: left;
-        margin: 0px 20px;
-        list-style: none;
-    }
+.menu li {
+    list-style: none;
+    float: left;
+    position: relative;
+    
+}
 
-        .menu li a {
-            color: blue;
-            text-decoration: none;
-        }
+.menu li a {
+    display:block;
+    color: white;
+    padding: 33.8px 25px;
+    text-align:center;  
+    text-decoration: none;
+    
+    
+}
+.menu li a:hover {
+    background-color: #333333;
+}
+
+#dropMenu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: none;
+    position: absolute;
+    left:0;
+    top: 85px;
+}
+#dropMenu a{
+    padding: 10px 35px;
+    height: 20px;
+}
+
+.menu li:hover #dropMenu {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background-color: #555555;
+}
+
+
+
+
+
+
 
 .grid {
     display: inline-block;
     width: 100%;
 }
 
-    .grid .row {
-        display: inline-block;
-        width: 100%;
-        margin-bottom: 1px;
-    }
+.grid .row {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 1px;
+}
 
-        .grid .row .col-1 {
-            display: inline-block;
-            width: 150px;
-        }
+.grid .row .col-1 {
+    display: inline-block;
+    width: 150px;
+}
 
-        .grid .row .col-2 {
-            display: inline-block;
-            width: 300px;
-        }
+.grid .row .col-2 {
+    display: inline-block;
+    width: 300px;
+}
 
-        .grid .row .col-3 {
-            display: inline-block;
-            width: 450px;
-        }
+.grid .row .col-3 {
+    display: inline-block;
+    width: 450px;
+}
 
-        .grid .row input[type=text] {
-            width: 300px;
-        }
+.grid .row input[type=text] {
+    width: 300px;
+}
 
-        .grid .row input[type=password] {
-            width: 300px;
-        }
+.grid .row input[type=password] {
+    width: 300px;
+}
 
 .right {
     float: right;
@@ -77,3 +134,5 @@
     width: 300px;
     height: 150px;
 }
+
+/*_Site*/
