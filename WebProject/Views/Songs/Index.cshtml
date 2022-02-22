@@ -1,0 +1,26 @@
+﻿@model WebProject.ViewModels.Songs.IndexVM
+@using WebProject.Entities
+@{
+    this.Layout = "/Views/Shared/_Site.cshtml";
+    ViewData["title"] = "SONGS";
+}
+
+<a href="/Songs/Create">NEW</a>
+<div class="grid">
+    <div class="row">
+        <div class="col-3">Tittle</div>
+        <div class="col-2"></div>
+    </div>
+    @foreach (Song item in Model.Items)
+    {
+        <div class="row">
+            <div class="col-3">@item.Tittle</div>
+            <div class="col-2">
+                <a href="/Songs/Share?id=@item.Id">share</a>
+                <a href="/Songs/Edit?id=@item.Id">edit</a>
+                <a href="/Songs/Delete?id=@item.Id"
+                   onclick="return confirm('Delete Record?')">delete</a>
+            </div>
+        </div>
+    }
+</div>

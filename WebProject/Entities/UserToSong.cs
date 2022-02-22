@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace WebProject.Entities
 {
-    public class PlaylistToUser
+    public class UserToSong
     {
         public int Id { get; set; }
-        public int? PlaylistId { get; set; }
-        public int? UserId { get; set; }
+        public int UserId { get; set; }
+        public int SongId { get; set; }
 
         [ForeignKey("UserId")]
         public virtual User User { get; set; }
 
-        [ForeignKey("PlaylistId")]
-        public virtual Playlist Playlist { get; set; }
+        [ForeignKey("SongId")]
+        public virtual Song Song { get; set; }
     }
 }

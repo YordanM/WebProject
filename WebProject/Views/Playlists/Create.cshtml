@@ -1,0 +1,32 @@
+﻿@model WebProject.ViewModels.Playlists.CreateVM
+@{
+    this.Layout = "/Views/Shared/_Site.cshtml";
+    ViewData["title"] = "CREATE PLAYLISTS";
+}
+
+<fieldset>
+    <legend>CREATE PLAYLIST</legend>
+    <form action="/Playlits/Create" method="post">
+        <div class="grid">
+            <div class="row">
+                <div class="col-1">
+                    @Html.LabelFor(m => m.Name)
+                </div>
+                <div class="col-2">
+                    @Html.TextBoxFor(m => m.Name)
+                </div>
+                <div class="col-2">
+                    @Html.ValidationMessageFor(m => m.Name)
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-2">
+                    <input type="submit" class="right" value="Save" />
+                    <a href="/Playlists/Index" class="right">Back</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</fieldset>
