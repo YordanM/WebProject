@@ -1,5 +1,27 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model WebProject.ViewModels.Playlists.IndexVM
+@using WebProject.Entities
 @{
+    this.Layout = "/Views/Shared/_Site.cshtml";
+    ViewData["title"] = "PLAYLISTS";
 }
+
+<a href="/Playlists/Create">NEW</a>
+<div class="grid">
+    <div class="row">
+        <div class="col-3">Tittle</div>
+        <div class="col-2"></div>
+    </div>
+    @foreach (Playlist item in Model.Items)
+    {
+        <div class="row">
+            <div class="col-3">@item.Name</div>
+            <div class="col-2">
+                <a href="/Playlists/Edit?id=@item.Id">add song</a>
+                <a href="/Playlists/Edit?id=@item.Id">remove song</a>
+                <a href="/Playlists/Edit?id=@item.Id">edit</a>
+                <a href="/Playlists/Delete?id=@item.Id"
+                   onclick="return confirm('Delete Record?')">delete</a>
+            </div>
+        </div>
+    }
+</div>

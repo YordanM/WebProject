@@ -1,5 +1,34 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model WebProject.ViewModels.Playlists.EditVM
 @{
+    this.Layout = "/Views/Shared/_Site.cshtml";
+    ViewData["title"] = "EDIT PLAYLISTS";
 }
+
+<fieldset>
+    <legend>EDIT PLAYLIST</legend>
+    <form action="/Playlists/Edit" method="post">
+        @Html.HiddenFor(m => m.Id)
+        @Html.HiddenFor(m => m.OwnerId)
+        <div class="grid">
+            <div class="row">
+                <div class="col-1">
+                    @Html.LabelFor(m => m.Name)
+                </div>
+                <div class="col-2">
+                    @Html.TextBoxFor(m => m.Name)
+                </div>
+                <div class="col-2">
+                    @Html.ValidationMessageFor(m => m.Name)
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-2">
+                    <input type="submit" class="right" value="Save" />
+                    <a href="/Playlists/Index" class="right">Back</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</fieldset>

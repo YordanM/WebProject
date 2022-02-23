@@ -6,7 +6,8 @@
 
 <fieldset>
     <legend>CREATE PLAYLIST</legend>
-    <form action="/Playlits/Create" method="post">
+    <form action="/Playlists/Create" method="post">
+        @Html.HiddenFor(m => m.OwnerId)
         <div class="grid">
             <div class="row">
                 <div class="col-1">
@@ -19,7 +20,7 @@
                     @Html.ValidationMessageFor(m => m.Name)
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col-1"></div>
                 <div class="col-2">

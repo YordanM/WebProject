@@ -11,7 +11,7 @@ namespace WebProject.ViewModels.Playlists
     {
         public int OwnerId { get; set; }
 
-        [DisplayName("Tittle: ")]
+        [DisplayName("Name: ")]
         [Required(ErrorMessage = "*This field is Required!")]
         public string Name { get; set; }
 

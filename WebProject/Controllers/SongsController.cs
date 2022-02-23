@@ -64,7 +64,7 @@ namespace WebProject.Controllers
             context.Songs.Add(item);
             context.SaveChanges();
 
-            return View();
+            return RedirectToAction("Index", "Songs");
         }
 
         [HttpGet]
