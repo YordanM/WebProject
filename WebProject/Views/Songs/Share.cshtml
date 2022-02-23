@@ -1,0 +1,58 @@
+﻿@model WebProject.ViewModels.Songs.ShareVM
+@using WebProject.Entities
+@{
+    this.Layout = "/Views/Shared/_Site.cshtml";
+    ViewData["title"] = "SHARE SONGS";
+}
+
+<hr />
+<h2>Share @Model.Song.Tittle</h2>
+<hr />
+
+<div class="grid">
+
+    <form action="/Songs/Share" method="post">
+        <input type="hidden" name="SongId" value="@Model.Song.Id" />
+        @(Model.Users.Count <= 0 ? "No Users to Share with" : "")
+        @foreach (User item in Model.Users)
+        {
+            <div class="row">
+                <div class="col-3">
+                    <input type="checkbox" name="UserIds" value="@item.Id" />
+                    <span>@item.Username (@item.FirstName @item.LastName)</span>
+                </div>
+            </div>
+        }
+        <div class="row">
+            <div class="col-2">
+                <input type="submit" value="Share" />
+            </div>
+        </div>
+    </form>
+
+    <hr />
+    <h2>Shared with:</h2>
+    <hr />
+
+    <div class="row">
+        <div class="col-2">Username</div>
+        <div class="col-2">First name</div>
+        <div class="col-2">Last name</div>
+        <div class="col-2"></div>
+
+
+    </div>
+    @foreach (UserToSong item in Model.Shares)
+    {
+        <div class="row">
+            <div class="col-2">@item.User.Username</div>
+            <div class="col-2">@item.User.FirstName</div>
+            <div class="col-2">@item.User.LastName</div>
+            <div class="col-2">
+                <a href="/Songs/RevokeShare?id=@item.Id"
+                   onclick="return confirm('Revoke Access?')">revoke</a>
+            </div>
+        </div>
+    }
+
+</div>

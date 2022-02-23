@@ -1,0 +1,49 @@
+﻿@model WebProject.ViewModels.Songs.EditVM
+@{
+    this.Layout = "/Views/Shared/_Site.cshtml";
+    ViewData["title"] = "EDIT SONGS";
+}
+
+<fieldset>
+    <legend>EDIT SONG</legend>
+    <form action="/Songs/Edit" method="post">
+        @Html.HiddenFor(m => m.Id)
+        @Html.HiddenFor(m => m.OwnerId)
+        <div class="grid">
+            <div class="row">
+                <div class="col-1">
+                    @Html.LabelFor(m => m.Tittle)
+                </div>
+                <div class="col-2">
+                    @Html.TextBoxFor(m => m.Tittle)
+                </div>
+                <div class="col-2">
+                    @Html.ValidationMessageFor(m => m.Tittle)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-1">
+                    @Html.LabelFor(m => m.Genre)
+                </div>
+                <div class="col-2">
+                    @Html.TextAreaFor(m => m.Genre)
+                </div>
+                <div class="col-2">
+                    @Html.ValidationMessageFor(m => m.Genre)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    @Html.ValidationMessage("summaryError")
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-2">
+                    <input type="submit" class="right" value="Save" />
+                    <a href="/Songs/Index" class="right">Back</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</fieldset>
