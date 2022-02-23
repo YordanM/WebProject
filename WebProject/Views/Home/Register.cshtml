@@ -20,7 +20,6 @@
                 <div class="form-input">
                     <span class="icon"><i class="fa fa-id-card" aria-hidden="true"></i></span>
                     @Html.PasswordFor(m => m.Password)
-
                 </div>
                
 
@@ -49,6 +48,7 @@
                 <div class="field-validation-error-div">
                     @Html.ValidationMessage("retypeError")
                     @Html.ValidationMessage("emptyInput")
+                    @Html.ValidationMessage("usernameTaken")
                 </div>
 
                 <div>

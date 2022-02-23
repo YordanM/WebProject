@@ -61,21 +61,36 @@ namespace ProjectManagement.Controllers
         {
             WebProjectDbContext context = new WebProjectDbContext();
 
+            //checks for empty input; if exist adds error and returns view with param model
             if (!ModelState.IsValid)
-                return View(model);
-            
-
+            {
+                this.ModelState.AddModelError("emptyInput", "Username and password should be between 6-15 characters. And all the fields must be filled!");
+                    return View(model);
+            }
+                
+            //checks if entered passwords are equal; if not adds error and returns view with param model
             if(model.Password != model.rPassword)
             {
                 this.ModelState.AddModelError("retypeError", "Please type the password twice!");
                 return View(model);
             }
-            if(model.Username == null || model.Password == null || model.FirstName == null || model.LastName == null)
+
+
+            // checks if username already exists in database; if exists adds error and returns 
+            WebProjectDbContext context2 = new WebProjectDbContext();
+
+            User user = context2.Users.Where(u => u.Username.ToLower() == model.Username.ToLower())
+                                           .FirstOrDefault();
+            
+            if(user != null)
             {
-                this.ModelState.AddModelError("emptyInput", "All fields must be filled!");
+                this.ModelState.AddModelError("usernameTaken", "The username is taken!");
+
                 return View(model);
             }
             
+            
+
 
             User item = new User();
             item.Username = model.Username;
@@ -86,6 +101,7 @@ namespace ProjectManagement.Controllers
             context.Users.Add(item);
             context.SaveChanges();
 
+            //if there's no errors logging in with the new account
             LoginVM loginModel = new LoginVM()
             {
                 Username = model.Username,
@@ -95,6 +111,7 @@ namespace ProjectManagement.Controllers
             Login(loginModel);
             return RedirectToAction("Index", "Home");
         }
+
 
         [AuthenticationFilter]
         public IActionResult Logout()

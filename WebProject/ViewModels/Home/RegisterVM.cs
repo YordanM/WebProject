@@ -9,18 +9,30 @@ namespace WebProject.ViewModels.Home
 {
     public class RegisterVM
     {
+        [MinLength(6)]
+        [MaxLength(15)]
         [Display(Prompt = "Username")]
+        
         public string Username { get; set; }
 
+        [MinLength(6)]
+        [MaxLength(15)]
         [Display(Prompt = "Password")]
         public string Password { get; set; }
 
+
+        [Required]
+        [MaxLength(15)]
         [Display(Prompt = "Retype the password")]
         public string rPassword { get; set; }
 
+        [Required]
+        [MaxLength(15)]
         [Display(Prompt = "First name")]
-        public string FirstName { get; set; }
-
+        public string FirstName { get; set; 
+        }
+        [Required]
+        [MaxLength(15)]
         [Display(Prompt = "Last name")]
         public string LastName { get; set; }
     }
