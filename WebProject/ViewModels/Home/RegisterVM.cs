@@ -9,20 +9,19 @@ namespace WebProject.ViewModels.Home
 {
     public class RegisterVM
     {
-        [DisplayName("Username: ")]
-        [Required(ErrorMessage = "*This field is Required!")]
+        [Display(Prompt = "Username")]
         public string Username { get; set; }
 
-        [DisplayName("Password: ")]
-        [Required(ErrorMessage = "*This field is Required!")]
+        [Display(Prompt = "Password")]
         public string Password { get; set; }
 
-        [DisplayName("First Name: ")]
-        [Required(ErrorMessage = "*This field is Required!")]
+        [Display(Prompt = "Retype the password")]
+        public string rPassword { get; set; }
+
+        [Display(Prompt = "First name")]
         public string FirstName { get; set; }
 
-        [DisplayName("Last Name: ")]
-        [Required(ErrorMessage = "*This field is Required!")]
+        [Display(Prompt = "Last name")]
         public string LastName { get; set; }
     }
 }

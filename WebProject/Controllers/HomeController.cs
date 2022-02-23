@@ -43,6 +43,8 @@ namespace ProjectManagement.Controllers
                 return View(model);
             }
 
+           
+
             HttpContext.Session.SetObject("loggedUser", loggedUser);
 
             return RedirectToAction("Index", "Home");
@@ -61,6 +63,19 @@ namespace ProjectManagement.Controllers
 
             if (!ModelState.IsValid)
                 return View(model);
+            
+
+            if(model.Password != model.rPassword)
+            {
+                this.ModelState.AddModelError("retypeError", "Please type the password twice!");
+                return View(model);
+            }
+            if(model.Username == null || model.Password == null || model.FirstName == null || model.LastName == null)
+            {
+                this.ModelState.AddModelError("emptyInput", "All fields must be filled!");
+                return View(model);
+            }
+            
 
             User item = new User();
             item.Username = model.Username;
@@ -71,6 +86,13 @@ namespace ProjectManagement.Controllers
             context.Users.Add(item);
             context.SaveChanges();
 
+            LoginVM loginModel = new LoginVM()
+            {
+                Username = model.Username,
+                Password = model.Password
+            };
+
+            Login(loginModel);
             return RedirectToAction("Index", "Home");
         }
 

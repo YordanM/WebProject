@@ -4,44 +4,48 @@
     ViewData["title"] = "LOGIN";
 }
 
-<fieldset>
-    <legend>LOGIN</legend>
-    <form action="/Home/Login" method="post">
-        <div class="grid">
-            <div class="row">
-                <div class="col-1">
-                    @Html.LabelFor(m => m.Username)
-                </div>
-                <div class="col-2">
+<div class="container-login">
+    <div class="form-outer-outer">
+        <div class="form-outer">
+            <h1>Login</h1>
+
+            <form action="/Home/Login" method="post">
+
+                <div class="form-input">
+                    <span class="icon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></span>
                     @Html.TextBoxFor(m => m.Username)
                 </div>
-                <div class="col-2">
+                <div class="field-validation-error-div">
                     @Html.ValidationMessageFor(m => m.Username)
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-1">
-                    @Html.LabelFor(m => m.Password)
-                </div>
-                <div class="col-2">
+
+
+                <div class="form-input">
+                    <span class="icon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></span>
                     @Html.PasswordFor(m => m.Password)
+
                 </div>
-                <div class="col-2">
+                <div class="field-validation-error-div">
                     @Html.ValidationMessageFor(m => m.Password)
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-1"></div>
-                <div class="col-2">
-                    @Html.ValidationMessage("authError, erorr", new { @style = "right, error" })
+
+                <div class="field-validation-error-div">
+                    @Html.ValidationMessage("authError")
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-1"></div>
-                <div class="col-2">
-                    <input type="submit" class="right" value="Login" />
+
+                <div class="login-or-register">
+                    <div class="ask-if-member">
+                        <p>Not a member? <a href="/Home/Register">Join us!</a></p>
+                    </div>
+                    <input id="submit-login-btn" type="submit" value="Login" />
                 </div>
-            </div>
+
+
+
+
+            </form>
         </div>
-    </form>
-</fieldset>
+    </div>
+
+</div>
+

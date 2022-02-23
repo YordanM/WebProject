@@ -9,11 +9,11 @@ namespace WebProject.ViewModels.Home
 {
     public class LoginVM
     {
-        [DisplayName("Username: ")]
+        [Display(Prompt = "Username")]
         [Required(ErrorMessage = "*This field is Required!")]
         public string Username { get; set; }
 
-        [DisplayName("Password: ")]
+        [Display(Prompt = "Password")]
         [Required(ErrorMessage = "*This field is Required!")]
         public string Password { get; set; }
     }
