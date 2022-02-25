@@ -1,0 +1,28 @@
+﻿@model WebProject.ViewModels.Playlists.AddSongVM
+@using WebProject.Entities
+@{
+    this.Layout = "/Views/Shared/_Site.cshtml";
+    ViewData["title"] = "SONGS";
+}
+
+
+<form action="/Playlists/AddSong" method="post">
+    @*@Html.HiddenFor(m => m.OwnerId)
+    @Html.HiddenFor(m => m.SongToPlaylist)*@
+
+    <div class="grid">
+        <div class="row">
+            <div class="col-3">Tittle</div>
+            <div class="col-2"></div>
+        </div>
+        @foreach (Song item in Model.Songs)
+        {
+            <div class="row">
+                <div class="col-3">@item.Tittle</div>
+                <div class="col-2">
+                    <a href="/Playlists/AddSong?id=@item.Id">Add to playlist</a>
+                </div>
+            </div>
+        }
+    </div>
+</form>

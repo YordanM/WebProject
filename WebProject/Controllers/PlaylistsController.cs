@@ -26,6 +26,40 @@ namespace WebProject.Controllers
         }
 
         [HttpGet]
+        public IActionResult AddSong(int playListId)
+        {
+            WebProjectDbContext context = new WebProjectDbContext();
+
+            List<int> remainingSongs = context.SongToPlaylists
+                                            .Where(i => i.PlaylistId == playListId)
+                                            .Select(i => i.SongId)
+                                            .ToList();
+            List<Song> availableSongs = context.Songs
+                                            .Where(i => remainingSongs.Contains(i.Id) == false)
+                                            .ToList();
+            AddSongVM model = new AddSongVM();
+
+            model.Songs = availableSongs;
+            return View(model);
+        }
+
+        /*[HttpPost]
+        public IActionResult AddSong(AddSongVM model)
+        {
+            WebProjectDbContext context = new WebProjectDbContext();
+
+            
+            SongToPlaylist item = new SongToPlaylist();
+            item.PlaylistId = model
+            item.SongId = model.SongId;
+
+            context.SongToPlaylists.Add(item);
+            context.SaveChanges();
+
+            return RedirectToAction("Index", "Playlist", new { Id = model.SongId });
+        }*/
+
+        [HttpGet]
         public IActionResult Create()
         {
             User loggedUser = this.HttpContext.Session.GetObject<User>("loggedUser");
