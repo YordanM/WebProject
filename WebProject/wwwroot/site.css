@@ -40,7 +40,7 @@ body{
 }
 
 .menu {
-    margin: 0 0 0 30%;
+    margin: 0;
     padding: 0;
     float:right;
 }
@@ -253,3 +253,5 @@ body{
 }
 
 /*_Site*/
+
+

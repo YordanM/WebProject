@@ -3,26 +3,44 @@
 @{
     this.Layout = "/Views/Shared/_Site.cshtml";
     ViewData["title"] = "USERS";
+    string atSign = "@";
+   
 }
-
-<div class="grid">
-    <div class="row">
-        <div class="col-1">Username</div>
-        <div class="col-2">First Name</div>
-        <div class="col-2">Last Name</div>
-        <div class="col-2"></div>
-    </div>
+<head>
+    <link href="~/users.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Source+Sans+3:wght@500&display=swap" rel="stylesheet">
+</head>
+<div class="header-message"><h1>Meet with our innovative authors!</h1></div>
+<div class="users-main-content">
     @foreach (User item in Model.Items)
     {
-        <div class="row">
-            <div class="col-1">@item.Username</div>
-            <div class="col-2">@item.FirstName</div>
-            <div class="col-2">@item.LastName</div>
-            <div class="col-2">
-                <a href="/Users/Edit?id=@item.Id">edit</a>
-                <a href="/Users/Delete?id=@item.Id"
-                   onclick="return confirm('Delete Record?');">delete</a>
+    <div class="user-card">
+        <div class="user-card-img">
+            <!--// TODO: should change with user profile photo!-->
+            <span class="user-icon"><i class="fa fa-user-circle" aria-hidden="true"></i></span>
+        </div>
+        
+        <div class="user-card-info">
+            <div class="user-name">
+                <div class="user-fName">@item.FirstName.ToUpper()</div>
+                <div class="user-lName">@item.LastName.ToUpper()</div>
+            </div>
+
+            <div class="user-username"> @atSign@item.Username</div>
+            <!--// TODO: '01' should change with code, which gets count of songs which is related to the current user id-->
+            <div class="user-card-song-and-btn">
+                <div class="user-song-counter">
+                    Songs: 01<span></span>
+                </div>
+                <div class="user-card-btn-outer">
+                    <button class="user-card-btn">See</button>
+                </div>
             </div>
         </div>
+    </div>
     }
 </div>
+ 
+   
