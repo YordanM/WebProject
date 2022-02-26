@@ -39,10 +39,19 @@
     <div class="home-description">
         <span class="home-icon"><i class="fa fa-list" aria-hidden="true"></i></span>
         <div class="home-info">
-            <h3>Create playlist.</h3>
+            <h3>Create your playlist.</h3>
             <h5>Share with people.</h5>
         </div>
     </div>
+
+    <div class="home-description" style="display: flex;justify-content: flex-end;">
+        <span class="home-icon"><i class="fa fa-microphone" aria-hidden="true"></i></span>
+        <div class="home-info" style="margin-right: 3%;">
+            <h3>Upload your music.</h3>
+            <h5>Present to the people.</h5>
+        </div>
+    </div>
+
     @if (loggedUser == null)
     {
         <h2>Do you want to be a part of it? <a href="/Home/Register">Join us!</a></h2>

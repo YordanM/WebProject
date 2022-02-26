@@ -1,10 +1,14 @@
 ﻿@model WebProject.ViewModels.Users.IndexVM
 @using WebProject.Entities
+@using WebProject.Repositories
 @{
     this.Layout = "/Views/Shared/_Site.cshtml";
     ViewData["title"] = "USERS";
     string atSign = "@";
-   
+    
+    WebProjectDbContext context = new WebProjectDbContext();
+
+
 }
 <head>
     <link href="~/users.css" rel="stylesheet" />
@@ -29,10 +33,13 @@
             </div>
 
             <div class="user-username"> @atSign@item.Username</div>
-            <!--// TODO: '01' should change with code, which gets count of songs which is related to the current user id-->
+            
             <div class="user-card-song-and-btn">
                 <div class="user-song-counter">
-                    Songs: 01<span></span>
+                    Songs: @context.Songs.Where(x => x.OwnerId == item.Id).Count()<span></span>
+                </div>
+                <div class="user-song-counter">
+                    PLs: @context.Playlists.Where(x => x.OwnerId == item.Id).Count()
                 </div>
                 <div class="user-card-btn-outer">
                     <button class="user-card-btn">See</button>
