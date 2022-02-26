@@ -1,5 +1,5 @@
 ﻿body {
-    background-color: #7f8af252;
+    background: linear-gradient(90deg, #b0dbf5, transparent);
 }
 .user-card {
     background-color: white;

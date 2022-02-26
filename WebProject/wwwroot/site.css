@@ -1,7 +1,8 @@
 ﻿@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@500&display=swap');
 
-body{
-    margin:0;
+body {
+    margin: 0;
+    background: linear-gradient(0deg, lightskyblue, transparent); 
 }
 .container {
     width: 100%;
@@ -88,10 +89,7 @@ body{
 }
 
 
-body{
-    background-color: lightskyblue;
-    height: 100vh;
-}
+
 /*login, register*/
 
 .container-login {
