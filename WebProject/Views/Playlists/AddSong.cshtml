@@ -7,8 +7,8 @@
 
 
 <form action="/Playlists/AddSong" method="post">
-    @*@Html.HiddenFor(m => m.OwnerId)
-    @Html.HiddenFor(m => m.SongToPlaylist)*@
+    @Html.HiddenFor(m => m.Song)
+    @Html.HiddenFor(m => m.Playlist)
 
     <div class="grid">
         <div class="row">
@@ -20,7 +20,8 @@
             <div class="row">
                 <div class="col-3">@item.Tittle</div>
                 <div class="col-2">
-                    <a href="/Playlists/AddSong?id=@item.Id">Add to playlist</a>
+                    <input type="submit" class="right" value="Add" />
+                    <a href="/Playlists/AddSong" class="right"></a>
                 </div>
             </div>
         }

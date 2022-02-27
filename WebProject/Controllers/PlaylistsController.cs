@@ -43,21 +43,23 @@ namespace WebProject.Controllers
             return View(model);
         }
 
-        /*[HttpPost]
+
+        //NOT WORKING THE MODEL IS NOT FILLED WITH DATA
+        [HttpPost]
         public IActionResult AddSong(AddSongVM model)
         {
             WebProjectDbContext context = new WebProjectDbContext();
 
-            
+
             SongToPlaylist item = new SongToPlaylist();
-            item.PlaylistId = model
-            item.SongId = model.SongId;
+            item.PlaylistId = model.Playlist.Id;
+            item.SongId = model.Song.Id;
 
             context.SongToPlaylists.Add(item);
             context.SaveChanges();
 
-            return RedirectToAction("Index", "Playlist", new { Id = model.SongId });
-        }*/
+            return RedirectToAction("Index", "Playlists");
+        }
 
         [HttpGet]
         public IActionResult Create()

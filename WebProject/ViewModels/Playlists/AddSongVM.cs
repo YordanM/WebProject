@@ -8,10 +8,10 @@ namespace WebProject.ViewModels.Playlists
 {
     public class AddSongVM
     {
+        public int PlaylistId { get; set; }
+        public Playlist Playlist { get; set; }
         public int SongId { get; set; }
         public Song Song { get; set; }
-        public List<int> PlaylistIds { get; set; }
-        public List<SongToPlaylist> Shares { get; set; }
         public List<Song> Songs { get; set; }
     }
 }
