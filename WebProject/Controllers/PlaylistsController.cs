@@ -26,12 +26,13 @@ namespace WebProject.Controllers
         }
 
         [HttpGet]
-        public IActionResult AddSong(int playListId)
+        public IActionResult AddSong(int id)
         {
+
             WebProjectDbContext context = new WebProjectDbContext();
 
             List<int> remainingSongs = context.SongToPlaylists
-                                            .Where(i => i.PlaylistId == playListId)
+                                            .Where(i => i.PlaylistId == id)
                                             .Select(i => i.SongId)
                                             .ToList();
             List<Song> availableSongs = context.Songs
@@ -59,6 +60,26 @@ namespace WebProject.Controllers
             context.SaveChanges();
 
             return RedirectToAction("Index", "Playlists");
+        }
+
+        [HttpGet]
+        public IActionResult Context(int id)
+        {
+
+            WebProjectDbContext context = new WebProjectDbContext();
+
+            List<int> remainingSongs = context.SongToPlaylists
+                                            .Where(i => i.PlaylistId == id)
+                                            .Select(i => i.SongId)
+                                            .ToList();
+            List<Song> availableSongs = context.Songs
+                                            .Where(i => remainingSongs.Contains(i.Id) == true)
+                                            .ToList();
+
+            ContextVM model = new ContextVM();
+
+            model.Songs = availableSongs;
+            return View(model);
         }
 
         [HttpGet]

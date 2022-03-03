@@ -1,4 +1,4 @@
-﻿@model WebProject.ViewModels.Playlists.AddSongVM
+﻿@model WebProject.ViewModels.Playlists.ContextVM
 @using WebProject.Entities
 @{
     this.Layout = "/Views/Shared/_Site.cshtml";
@@ -6,7 +6,7 @@
 }
 
 
-<form action="/Playlists/AddSong" method="post">
+<form action="/Playlists/Context" method="post">
     @Html.HiddenFor(m => m.Song.Id)
     @Html.HiddenFor(m => m.Playlist.Id)
 
@@ -20,8 +20,8 @@
             <div class="row">
                 <div class="col-3">@item.Tittle</div>
                 <div class="col-2">
-                    <input type="submit" class="right" value="Add" />
-                    <a href="/Playlists/AddSong?id=@item.Id" class="right"></a>
+                    <input type="submit" class="right" value="remove" />
+                    <a href="/Playlists/Context" class="right"></a>
                 </div>
             </div>
         }
