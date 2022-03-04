@@ -1,0 +1,47 @@
+﻿.sg-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80%;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 120%;
+    
+}
+.sg-content fieldset {
+    padding: 100px;
+}
+.sg-input{
+    margin-bottom:20px;
+}
+.sg-btns {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 20px;
+}
+#sg-save {
+    width: 40%;
+    background-color: green;
+    border: none;
+    color: white;
+    font-family: 'Source Sans 3';
+    height: 3%; 
+    cursor: pointer;
+}
+#sg-save:hover{
+    background-color: darkseagreen;
+
+}
+#sg-back {
+    width: 40%;
+    background-color: red;
+    text-decoration: none;
+    color: white;
+    text-align: center;
+    font-family: 'Source Sans 3';
+    font-size: 75%;
+    height: auto;
+}
+#sg-back:hover {
+    background-color: indianred;
+}

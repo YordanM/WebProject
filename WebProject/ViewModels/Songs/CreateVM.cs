@@ -11,12 +11,18 @@ namespace WebProject.ViewModels.Songs
     {
         public int OwnerId { get; set; }
 
-        [DisplayName("Tittle: ")]
+        [DisplayName("Music Title: ")]
         [Required(ErrorMessage = "*This field is Required!")]
         public string Tittle { get; set; }
 
-        [DisplayName("Description: ")]
+        [DisplayName("Music Genre: ")]
         [Required(ErrorMessage = "*This field is Required!")]
         public string Genre { get; set; }
+
+
+        [DisplayName("Music Language: ")]
+        [Required(ErrorMessage = "*This field is Required!")]
+        public string Lang { get; set; }
+        
     }
 }

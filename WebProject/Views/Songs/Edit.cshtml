@@ -4,46 +4,72 @@
     ViewData["title"] = "EDIT SONGS";
 }
 
-<fieldset>
-    <legend>EDIT SONG</legend>
-    <form action="/Songs/Edit" method="post">
-        @Html.HiddenFor(m => m.Id)
-        @Html.HiddenFor(m => m.OwnerId)
-        <div class="grid">
-            <div class="row">
-                <div class="col-1">
-                    @Html.LabelFor(m => m.Tittle)
+<head>
+    <link href="~/create-edit-song.css" rel="stylesheet" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+          integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=League+Spartan:wght@200&family=Open+Sans:wght@300&family=Source+Sans+3:wght@500&display=swap" rel="stylesheet">
+</head>
+
+
+<div class="sg-content">
+    <fieldset>
+        <legend>Edit Song Details</legend>
+        <form action="/Songs/Edit" method="post">
+            @Html.HiddenFor(m => m.Id)
+            @Html.HiddenFor(m => m.OwnerId)
+            <div class="sg-form-inner">
+                <div class="sg-input">
+                    <div>
+                        @Html.LabelFor(m => m.Tittle)
+                    </div>
+                    <div>
+                        @Html.TextBoxFor(m => m.Tittle)
+                    </div>
+                    <div>
+                        @Html.ValidationMessageFor(m => m.Tittle)
+                    </div>
                 </div>
-                <div class="col-2">
-                    @Html.TextBoxFor(m => m.Tittle)
+                <div class="sg-input">
+                    <div>
+                        @Html.LabelFor(m => m.Genre)
+                    </div>
+                    <div>
+                        @Html.TextBoxFor(m => m.Genre)
+                    </div>
+                    <div>
+                        @Html.ValidationMessageFor(m => m.Genre)
+                    </div>
                 </div>
-                <div class="col-2">
-                    @Html.ValidationMessageFor(m => m.Tittle)
+                <div class="sg-input">
+                    <div>
+                        @Html.LabelFor(m => m.Lang)
+                    </div>
+                    <div>
+                        @Html.TextBoxFor(m => m.Lang)
+                    </div>
+                    <div>
+                        @Html.ValidationMessageFor(m => m.Lang)
+                    </div>
                 </div>
+
             </div>
-            <div class="row">
-                <div class="col-1">
-                    @Html.LabelFor(m => m.Genre)
-                </div>
-                <div class="col-2">
-                    @Html.TextAreaFor(m => m.Genre)
-                </div>
-                <div class="col-2">
-                    @Html.ValidationMessageFor(m => m.Genre)
-                </div>
+
+            <div>
+                @Html.ValidationMessage("summaryError")
             </div>
-            <div class="row">
-                <div class="col-3">
-                    @Html.ValidationMessage("summaryError")
-                </div>
+
+            <div class="sg-btns">
+                <input id="sg-save" type="submit" value="Save" />
+                <a id="sg-back" href="/Songs/Index">Back</a>
             </div>
-            <div class="row">
-                <div class="col-1"></div>
-                <div class="col-2">
-                    <input type="submit" class="right" value="Save" />
-                    <a href="/Songs/Index" class="right">Back</a>
-                </div>
-            </div>
-        </div>
-    </form>
-</fieldset>
+        </form>
+    </fieldset>
+</div>
+
+

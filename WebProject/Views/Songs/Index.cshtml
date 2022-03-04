@@ -1,26 +1,126 @@
 ﻿@model WebProject.ViewModels.Songs.IndexVM
 @using WebProject.Entities
+@using WebProject.ExtentionMethods
+@using WebProject.Repositories
 @{
     this.Layout = "/Views/Shared/_Site.cshtml";
     ViewData["title"] = "SONGS";
+    User loggedUser = this.ViewContext.HttpContext.Session.GetObject<User>("loggedUser");
+    WebProjectDbContext context = new WebProjectDbContext();
+    string atSign = "@";
+    int songNumber = 0;
 }
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="~/songs.css" rel="stylesheet" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+          integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=League+Spartan:wght@200&family=Open+Sans:wght@300&family=Source+Sans+3:wght@500&display=swap" rel="stylesheet">
+</head>
 
-<a href="/Songs/Create">NEW</a>
-<div class="grid">
-    <div class="row">
-        <div class="col-3">Tittle</div>
-        <div class="col-2"></div>
+
+<div class="sg-grid">
+    <div class="new-song"><a href="/Songs/Create">Upload new SONG!</a></div>
+    <div class="sg-header-row">
+        <div class="sg-col-1">#</div>
+        <div class="sg-col-2" style="color: #afafaf;">Title</div>
+        <div class="sg-col-3">Genre</div>
+        <div class="sg-col-4">Lang</div>
+        <div class="sg-col-5"><i class="fa fa-wrench" aria-hidden="true"></i></div>
     </div>
+
     @foreach (Song item in Model.Items)
     {
-        <div class="row">
-            <div class="col-3">@item.Tittle</div>
-            <div class="col-2">
-                <a href="/Songs/Share?id=@item.Id">share</a>
-                <a href="/Songs/Edit?id=@item.Id">edit</a>
-                <a href="/Songs/Delete?id=@item.Id"
-                   onclick="return confirm('Delete Record?')">delete</a>
+        songNumber++;
+
+        <div class="sg-row">
+            <div class="sg-col-1">@songNumber</div>
+            <div class="sg-col-2">@item.Tittle</div>
+            <div class="sg-col-3">@item.Genre</div>
+
+            <!-- todo: get language of the song -->
+            <div class="sg-col-4">EN</div>
+
+            <div class="sg-col-5">
+                @if (loggedUser.Id == item.OwnerId)
+                {
+                    <!-- Write your comments here -->
+                    <div class="song-options">
+                        <a href="/Songs/Share?id=@item.Id"><i class="fa fa-share" aria-hidden="true"></i></a>
+                        <a href="/Songs/Edit?id=@item.Id"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                        <a id="del-btn" href="/Songs/Delete?id=@item.Id"
+                           onclick="return confirm('Delete Record?')"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                    </div>
+                }
+                else
+                {
+                    User sharedBy = context.Users.Where(x => x.Id == item.OwnerId).FirstOrDefault();
+                    <span class="shared-by">by <em>@atSign@sharedBy.Username</em></span>
+                }
             </div>
+
         </div>
     }
+    
+</div>
+
+
+
+
+<div class="multimedia">
+    <div class="music-player">
+        <div class="song-bar">
+            <div class="song-infos">
+                <div class="image-container">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/bc/Rainforest_Fatu_Hiva.jpg" alt="" />
+                </div>
+                <div class="song-description">
+                    @{
+                        Song song = Model.Items.FirstOrDefault();
+                    }
+                    <p class="title">
+
+                        @song.Tittle
+                    </p>
+                    <p class="artist">@loggedUser.FirstName @loggedUser.LastName</p>
+                </div>
+            </div>
+            <div class="icons">
+                <i class="far fa-heart"></i>
+                <i class="fas fa-compress"></i>
+            </div>
+        </div>
+        <div class="progress-controller">
+            <div class="control-buttons">
+                <i class="fas fa-random"></i>
+                <i class="fas fa-step-backward"></i>
+                <i class="play-pause fas fa-play"></i>
+                <i class="fas fa-step-forward"></i>
+                <i class="fas fa-undo-alt"></i>
+            </div>
+            <div class="progress-container">
+                <span>0:49</span>
+                <div class="progress-bar">
+                    <div class="progress"></div>
+                </div>
+                <span>3:15</span>
+            </div>
+        </div>
+        <div class="other-features">
+            <i class="fas fa-list-ul"></i>
+            <i class="fas fa-desktop"></i>
+            <div class="volume-bar">
+                <i class="fas fa-volume-down"></i>
+                <div class="progress-bar">
+                    <div class="progress"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

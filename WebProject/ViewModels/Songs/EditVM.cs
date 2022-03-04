@@ -19,5 +19,9 @@ namespace WebProject.ViewModels.Songs
         [DisplayName("Description: ")]
         [Required(ErrorMessage = "*This field is Required!")]
         public string Genre { get; set; }
+
+        [DisplayName("Music Language: ")]
+        [Required(ErrorMessage = "*This field is Required!")]
+        public string Lang { get; set; }
     }
 }
