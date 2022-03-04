@@ -40,21 +40,22 @@ namespace WebProject.Controllers
                                             .ToList();
             AddSongVM model = new AddSongVM();
 
+            model.PlaylistId = id;
             model.Songs = availableSongs;
+
             return View(model);
         }
 
-
-        //NOT WORKING THE MODEL IS NOT FILLED WITH DATA
         [HttpPost]
-        public IActionResult AddSong(AddSongVM model)
+        [HttpGet]
+        public IActionResult AddSongA(AddSongVM model)
         {
             WebProjectDbContext context = new WebProjectDbContext();
 
 
             SongToPlaylist item = new SongToPlaylist();
-            item.PlaylistId = model.Playlist.Id;
-            item.SongId = model.Song.Id;
+            item.PlaylistId = model.PlaylistId;
+            item.SongId = model.SongId;
 
             context.SongToPlaylists.Add(item);
             context.SaveChanges();
