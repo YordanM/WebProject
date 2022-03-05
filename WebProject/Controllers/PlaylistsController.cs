@@ -79,8 +79,29 @@ namespace WebProject.Controllers
 
             ContextVM model = new ContextVM();
 
+            model.PlaylistId = id;
             model.Songs = availableSongs;
             return View(model);
+        }
+
+        [HttpPost]
+        [HttpGet]
+        public IActionResult ContextA(ContextVM model)
+        {
+            WebProjectDbContext context = new WebProjectDbContext();
+
+
+            SongToPlaylist item = context.SongToPlaylists.Where(x => x.SongId == model.SongId).FirstOrDefault();
+
+            if (item == null)
+            {
+                return RedirectToAction("Index", "Playlists");
+            }
+
+            context.SongToPlaylists.Remove(item);
+            context.SaveChanges();
+
+            return RedirectToAction("Index", "Playlists");
         }
 
         [HttpGet]
