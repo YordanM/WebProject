@@ -3,31 +3,36 @@
     this.Layout = "/Views/Shared/_Site.cshtml";
     ViewData["title"] = "CREATE PLAYLISTS";
 }
+<head>
+    <link href="~/create-edit-song.css" rel="stylesheet" />
+</head>
+<div class="sg-content">
+    <fieldset>
+        <legend>Create New Playlist</legend>
+        <form action="/Playlists/Create" method="post">
+            @Html.HiddenFor(m => m.OwnerId)
+            <div class="sg-form-inner">
+                <div class="sg-input">
+                    <div>
+                        @Html.LabelFor(m => m.Name)
+                    </div>
+                    <div>
+                        @Html.TextBoxFor(m => m.Name)
+                    </div>
+                    <div>
+                        @Html.ValidationMessageFor(m => m.Name)
+                    </div>
+                </div>
 
-<fieldset>
-    <legend>CREATE PLAYLIST</legend>
-    <form action="/Playlists/Create" method="post">
-        @Html.HiddenFor(m => m.OwnerId)
-        <div class="grid">
-            <div class="row">
-                <div class="col-1">
-                    @Html.LabelFor(m => m.Name)
+                <div>
+                    @Html.ValidationMessage("summaryError")
                 </div>
-                <div class="col-2">
-                    @Html.TextBoxFor(m => m.Name)
-                </div>
-                <div class="col-2">
-                    @Html.ValidationMessageFor(m => m.Name)
+
+                <div class="sg-btns">
+                    <input type="submit" id="sg-save" value="Save" />
+                    <a href="/Playlists/Index" id="sg-back">Back</a>
                 </div>
             </div>
-
-            <div class="row">
-                <div class="col-1"></div>
-                <div class="col-2">
-                    <input type="submit" class="right" value="Save" />
-                    <a href="/Playlists/Index" class="right">Back</a>
-                </div>
-            </div>
-        </div>
-    </form>
-</fieldset>
+        </form>
+    </fieldset>
+</div>

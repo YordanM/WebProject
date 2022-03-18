@@ -19,7 +19,6 @@
             <div class="title">
                 <h1><a href="/Home/Index">WPotify</a></h1>
             </div>
-            
             <div class="container">
                 <ul class="menu">
                     <!-- Home button dissappears when current view is home/index -->
@@ -45,7 +44,6 @@
                             <li><a href="/Playlists/Index">PLAYLISTS</a></li>
                         }
 
-
                         <li>
                             <a> @loggedUser.Username.ToUpper()</a>
                             <ul id="dropMenu">
@@ -65,20 +63,10 @@
                         {
                             <li><a href="/Home/Register">REGISTER</a></li>
                         }
-
-                        
                     }
-
                 </ul>
-                
-                
-
             </div>
-        
-
-
         </div>
-    
     <div class="container">
         @RenderBody()
     </div>

@@ -1,13 +1,10 @@
-﻿body {
-    
-    
-}
+﻿
 
-.sg-grid {
+.pl-grid {
     font-size: 14px;
     height: 60%;
     display: inline-block;
-    width: 60%;
+    width: 50%;
     background: linear-gradient(180deg, black, #41829f);
     color: #afafaf;
     padding: 5%;
@@ -21,73 +18,87 @@
 #dropMenu a{
     padding:20px 35px;
 }
-.sg-row {
+.pl-row {
     display: inline-block;
     width: 100%;
     padding: 7.5px
 
 }
-.sg-row:hover {
+.pl-row:hover {
     background-color: rgb(197, 197, 197, 0.3);
 }
 
-.sg-header-row {
+.pl-header-row {
     display: inline-block;
     width: 100%;
     margin-bottom: 25px;
 }
 
- .sg-col-1 {
+
+ .pl-col-1 {
     display: inline-block;
     width: 5%;
-    text-align:center;
+    text-align:right;
 
 }
+ .pl-col-1-cntxt{
+     width: 4%;
+ }
 
-.sg-col-2 {
+.pl-col-2 {
     display: inline-block;
-    width: 44%;
+    width: 65%;
     padding-left:1%;
     color: white;
 }
- .sg-col-3 {
-    display: inline-block;
-    width: 20%;
 
+.pl-col-2-cntxt{
+    color: white;
+    text-decoration:none;
+}
 
-}.sg-col-4 {
+.pl-col-2-cntxt:hover {
+    text-decoration: underline;
+    color: #cfcfcf; 
+}
+
+ .pl-col-3 {
     display: inline-block;
     width: 10%;
-}
 
- .sg-col-5 {
+
+}
+.pl-col-4 {
     display: inline-block;
-    width: 15%;
-    text-align:center;
+    width: 10%;
+    text-align: center;
 }
 
-.song-options {
+
+
+.pl-options {
     display: flex;
     justify-content: space-around;
 }
 
 
-.song-options a {
-    color: #c2c2c2;
-    
+.pl-options a {
+    text-decoration:none;
+    color:white;
 }
 
-.song-options a:hover {
+
+.pl-options a:hover {
     color: black;
 }
 
-.song-options #del-btn:hover {
+.pl-options #del-btn:hover {
     color:red;
 }
-.sg-col-5 em{
+.pl-col-4 em{
     color:white
 }
-.new-song {
+.new-pl {
     width: 100%;
     margin: 3% 0;
     display: flex;
@@ -96,7 +107,7 @@
 
 }
 
-.new-song a {
+.new-pl a {
     text-decoration: none;
     color: white;
     background: black;
@@ -105,10 +116,11 @@
     box-shadow: 0px 3px 3px rgb(0 0 0 / 38%);
 }
 
-.new-song a:hover{
+.new-pl a:hover{
     color:white;
     background-color:dimgray;
 }
+
 
 
 
@@ -278,212 +290,3 @@
         background-color: var(--primary-color);
         transform: translate(50%, calc(2px - 50%));
     }
-
-/*Multimedia*/
-
-@import url(//db.onlinewebfonts.com/c/860c3ec7bbc5da3e97233ccecafe512e?family=Circular+Std+Book);
-
-.multimedia {
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-    font-family: "circular std book", sans-serif;
-}
-
-* {
-    box-sizing: border-box;
-}
-
-.music-player {
-    --primary-color: #ddd;
-    --secondary-color: #999;
-    --blue-color: blue;
-    --padding: 1em;
-    background-color: #111;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    height: 7rem;
-    padding: var(--padding);
-    color: var(--primary-color);
-}
-
-    .music-player i {
-        color: var(--secondary-color);
-    }
-
-        .music-player i:hover {
-            color: var(--primary-color);
-        }
-
-.multimedia .fa-play:before {
-    color: black;
-}
-
-.song-bar {
-    position: absolute;
-    left: var(--padding);
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 1.5rem;
-    width: 25%;
-}
-
-.song-infos {
-    display: flex;
-    align-items: center;
-    gap: 1em;
-}
-
-.multimedia .image-container {
-    --size: 4.5em;
-    flex-shrink: 0;
-    width: var(--size);
-    height: var(--size);
-}
-
-    .multimedia .image-container img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-.song-description p {
-    margin: 0.2em;
-}
-
-.multimedia .title,
-.multimedia .artist {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
-    overflow: hidden;
-}
-
-.multimedia .title:hover,
-.multimedia .artist:hover {
-    text-decoration: underline;
-}
-
-.multimedia .artist {
-    color: var(--secondary-color);
-}
-
-.music-player .icons {
-    display: flex;
-    gap: 1em;
-}
-
-.progress-controller {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5em;
-    color: var(--secondary-color);
-}
-
-.control-buttons {
-    display: flex;
-    align-items: center;
-    gap: 2em;
-}
-
-.play-pause {
-    display: inline-block;
-    padding: 1em;
-    background-color: var(--primary-color);
-    color: #111;
-    border-radius: 50%;
-}
-
-.play-pause:hover {
-    transform: scale(1.1);
-    color: #111;
-}
-
-.progress-container {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1em;
-}
-
-.progress-bar {
-    height: 4px;
-    border-radius: 10px;
-    width: 30%;
-    background-color: #ccc4;
-}
-
-.progress {
-    position: relative;
-    height: 100%;
-    width: 30%;
-    border-radius: 10px;
-    background-color: var(--secondary-color);
-}
-
-.progress-bar:hover .progress {
-    background-color: var(--blue-color);
-}
-
-.progress-bar:hover .progress::after {
-    content: "";
-    position: absolute;
-    --size: 1em;
-    width: var(--size);
-    height: var(--size);
-    right: 0;
-    border-radius: 50%;
-    background-color: var(--primary-color);
-    transform: translate(50%, calc(2px - 50%));
-}
-
-.other-features {
-    position: absolute;
-    right: var(--padding);
-    display: flex;
-    flex-direction: row;
-    gap: 1em;
-}
-
-.volume-bar {
-    display: flex;
-    align-items: center;
-    gap: .7em;
-}
-
-
-
-.volume-bar .progress-bar:hover .progress::after {
-    --size: .8em;
-}
-
-
-.other-features {
-    position: absolute;
-    right: var(--padding);
-    display: flex;
-    flex-direction: row;
-    gap: 1em;
-}
-
-.volume-bar {
-    display: flex;
-    align-items: center;
-    gap: .7em;
-}
-
-
-
-.volume-bar .progress-bar:hover .progress::after {
-    --size: .8em;
-}
-
-

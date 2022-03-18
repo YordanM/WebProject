@@ -81,6 +81,7 @@ namespace WebProject.Controllers
 
             model.PlaylistId = id;
             model.Songs = availableSongs;
+            model.Playlist = context.Playlists.Where(pl => pl.Id == id).FirstOrDefault();
             return View(model);
         }
 
@@ -89,7 +90,6 @@ namespace WebProject.Controllers
         public IActionResult ContextA(ContextVM model)
         {
             WebProjectDbContext context = new WebProjectDbContext();
-
 
             SongToPlaylist item = context.SongToPlaylists.Where(x => x.SongId == model.SongId).FirstOrDefault();
 
@@ -100,7 +100,7 @@ namespace WebProject.Controllers
 
             context.SongToPlaylists.Remove(item);
             context.SaveChanges();
-
+            //return RedirectToAction("Context", "Playlists", new { @id = model.PlaylistId});
             return RedirectToAction("Index", "Playlists");
         }
 
