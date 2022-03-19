@@ -133,8 +133,20 @@ namespace WebProject.Controllers
         {
             WebProjectDbContext context = new WebProjectDbContext();
 
-            Song item = new Song();
-            item.Id = id;
+            User loggedUser = this.HttpContext.Session.GetObject<User>("loggedUser");
+
+            var item = context.Songs.FirstOrDefault(x => x.Id == id);
+
+            if (item == null)
+            {
+                return RedirectToAction("Index", "Songs");
+            }
+
+            if (item.OwnerId != loggedUser.Id)
+            {
+                ModelState.AddModelError("summaryError", "Owner impersonation attempt detected!");
+                return RedirectToAction("Index", "Songs");
+            }
 
             var shared = context.UserToSongs
                 .Where(s => s.SongId == id)

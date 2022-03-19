@@ -152,10 +152,10 @@ namespace WebProject.Controllers
                 return RedirectToAction("Index", "Playlists");
             }
 
-            /*if (item.Id != loggedUser.Id)
+            if (item.Id != loggedUser.Id)
             {
                 return RedirectToAction("Index", "Playlists");
-            }*/
+            }
 
             context.Playlists.Remove(item);
             context.SaveChanges();
@@ -177,10 +177,10 @@ namespace WebProject.Controllers
                 return RedirectToAction("Index", "Playlists");
             }
 
-            /*if (item.Id != loggedUser.Id)
+            if (item.Id != loggedUser.Id)
             {
                 return RedirectToAction("Index", "Playlists");
-            }*/
+            }
 
             EditVM model = new EditVM();
             model.Id = item.Id;
