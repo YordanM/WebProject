@@ -1,10 +1,12 @@
-﻿
+﻿* {
+    
+}
 
 .pl-grid {
     font-size: 14px;
     height: 60%;
     display: inline-block;
-    width: 50%;
+    width: 60%;
     background: linear-gradient(180deg, black, #41829f);
     color: #afafaf;
     padding: 5%;
