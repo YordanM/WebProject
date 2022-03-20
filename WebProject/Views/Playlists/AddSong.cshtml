@@ -1,28 +1,65 @@
 ﻿@model WebProject.ViewModels.Playlists.AddSongVM
 @using WebProject.Entities
+@using WebProject.ExtentionMethods
+@using WebProject.Repositories
 @{
     this.Layout = "/Views/Shared/_Site.cshtml";
-    ViewData["title"] = "SONGS";
+    string plName = Model.Playlist.Name;
+    ViewData["title"] = plName;
+    User loggedUser = this.ViewContext.HttpContext.Session.GetObject<User>("loggedUser");
+    WebProjectDbContext context = new WebProjectDbContext();
+    
+    int songNumber = 0;
 }
 
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="~/songs.css" rel="stylesheet" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+          integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=League+Spartan:wght@200&family=Open+Sans:wght@300&family=Source+Sans+3:wght@500&display=swap" rel="stylesheet">
+</head>
+
+ 
 
 <form action="/Playlists/AddSong" method="post">
     @Html.HiddenFor(m => m.Song.Id)
     @Html.HiddenFor(m => m.Playlist.Id)
 
-    <div class="grid">
-        <div class="row">
-            <div class="col-3">Tittle</div>
-            <div class="col-2"></div>
+    <div class="sg-grid">
+        <h1>Add song to @plName</h1>
+        <div class="sg-header-row">
+            <div class="sg-col-1">#</div>
+            <div class="sg-col-2" style="color: #afafaf;">Title</div>
+            <div class="sg-col-3">Genre</div>
+            <div class="sg-col-4">Lang</div>
+            <div class="sg-col-5"><i class="fa fa-wrench" aria-hidden="true"></i></div>
         </div>
+
         @foreach (Song item in Model.Songs)
         {
 
-            <div class="row">
-                <div class="col-3">@item.Tittle</div>
-                <div class="col-2">
-                    @*<input type="submit" class="right" value="Add" />*@
-                    <a href="/Playlists/AddSongA?SongId=@item.Id&PlaylistId=@(Model.PlaylistId)" class="right">Add</a>
+            songNumber++;
+
+            <div class="sg-row">
+                <div class="sg-col-1">@songNumber</div>
+                <div class="sg-col-2">@item.Tittle</div>
+                <div class="sg-col-3">@item.Genre</div>
+
+                <!-- todo: get language of the song -->
+                <div class="sg-col-4">EN</div>
+
+                <div class="sg-col-5">
+
+                    <div class="song-options">
+                        <a href="/Playlists/AddSongA?SongId=@item.Id&PlaylistId=@(Model.PlaylistId)"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+                    </div>
                 </div>
             </div>
         }

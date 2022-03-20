@@ -42,6 +42,7 @@ namespace WebProject.Controllers
 
             model.PlaylistId = id;
             model.Songs = availableSongs;
+            model.Playlist = model.Playlist = context.Playlists.Where(pl => pl.Id == id).FirstOrDefault();
 
             return View(model);
         }
@@ -56,9 +57,10 @@ namespace WebProject.Controllers
             SongToPlaylist item = new SongToPlaylist();
             item.PlaylistId = model.PlaylistId;
             item.SongId = model.SongId;
-
+           
             context.SongToPlaylists.Add(item);
             context.SaveChanges();
+
 
             return RedirectToAction("Index", "Playlists");
         }

@@ -4,7 +4,9 @@
 @using WebProject.Repositories
 @{
     this.Layout = "/Views/Shared/_Site.cshtml";
-    ViewData["title"] = "SONGS";
+    string plName = Model.Playlist.Name;
+    ViewData["title"] = plName;
+
     User loggedUser = this.ViewContext.HttpContext.Session.GetObject<User>("loggedUser");
     WebProjectDbContext context = new WebProjectDbContext();
     int songNumber = 0;
@@ -23,13 +25,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=League+Spartan:wght@200&family=Open+Sans:wght@300&family=Source+Sans+3:wght@500&display=swap" rel="stylesheet">
 </head>
-<h1></h1>
+
 <form action="/Playlists/Context" method="post">
     @Html.HiddenFor(m => m.Song.Id)
     @Html.HiddenFor(m => m.Playlist.Id)
 
     <div class="sg-grid">
-        <h1>@Model.Playlist.Name</h1>
+        <h1>@plName</h1>
         <div class="sg-header-row">
             <div class="sg-col-1">#</div>
             <div class="sg-col-2" style="color: #afafaf;">Title</div>
