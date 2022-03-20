@@ -1,58 +1,103 @@
 ﻿@model WebProject.ViewModels.Songs.ShareVM
 @using WebProject.Entities
+@using WebProject.Repositories
 @{
     this.Layout = "/Views/Shared/_Site.cshtml";
     ViewData["title"] = "SHARE SONGS";
+    string atSign = "@";
+    WebProjectDbContext context = new WebProjectDbContext();
 }
 
-<hr />
-<h2>Share @Model.Song.Tittle</h2>
-<hr />
+<head>
+    <link href="~/users.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Source+Sans+3:wght@500&display=swap" rel="stylesheet">
+</head>
 
-<div class="grid">
+<div class="share-main">
+    <div class="header-message"><h1>Share @Model.Song.Tittle.ToUpper() with: </h1></div>
 
-    <form action="/Songs/Share" method="post">
-        <input type="hidden" name="SongId" value="@Model.Song.Id" />
-        @(Model.Users.Count <= 0 ? "No Users to Share with" : "")
-        @foreach (User item in Model.Users)
-        {
-            <div class="row">
-                <div class="col-3">
-                    <input type="checkbox" name="UserIds" value="@item.Id" />
-                    <span>@item.Username (@item.FirstName @item.LastName)</span>
+    <div class="share-with">
+        <form action="/Songs/Share" method="post">
+            <input type="hidden" name="SongId" value="@Model.Song.Id" />
+            @(Model.Users.Count <= 0 ? "No Users to Share with" : "")
+            @foreach (User item in Model.Users)
+            {
+                <div class="share-user-card">
+                    <div class="user-card-img" style="background-color: #f2d4e7a1;">
+                        <!--// TODO: should change with user profile photo!-->
+                        <span class="user-icon"><i class="fa fa-user-circle" aria-hidden="true"></i></span>
+                    </div>
+
+                    <div class="user-card-info">
+
+                        <div class="user-name">
+                            <div class="user-fName">@item.FirstName.ToUpper()</div>
+                            <div class="user-lName">@item.LastName.ToUpper()</div>
+                        </div>
+
+                        <div class="user-username"> @atSign@item.Username</div>
+
+                        <div class="user-card-song-and-btn">
+
+                            <div class="user-song-counter">
+                                Songs: @context.Songs.Where(x => x.OwnerId == item.Id).Count()<span></span>
+                            </div>
+                            <div class="user-song-counter">
+                                PLs: @context.Playlists.Where(x => x.OwnerId == item.Id).Count()
+                            </div>
+                            <div class="user-card-btn-outer">
+                                <input type="checkbox" name="UserIds" value="@item.Id" />
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        }
-        <div class="row">
-            <div class="col-2">
+
+
+            }
+            <div class="share-submit">
                 <input type="submit" value="Share" />
             </div>
-        </div>
-    </form>
-
-    <hr />
-    <h2>Shared with:</h2>
-    <hr />
-
-    <div class="row">
-        <div class="col-2">Username</div>
-        <div class="col-2">First name</div>
-        <div class="col-2">Last name</div>
-        <div class="col-2"></div>
-
+        </form>
 
     </div>
+
+    <div class="header-message"><h1>@Model.Song.Tittle.ToUpper() is shared with: </h1></div>
+
     @foreach (UserToSong item in Model.Shares)
     {
-        <div class="row">
-            <div class="col-2">@item.User.Username</div>
-            <div class="col-2">@item.User.FirstName</div>
-            <div class="col-2">@item.User.LastName</div>
-            <div class="col-2">
-                <a href="/Songs/RevokeShare?id=@item.Id"
-                   onclick="return confirm('Revoke Access?')">revoke</a>
+        <div class="shared-already-with">
+            <div class="user-card">
+                <div class="user-card-img" style="background-color: #f2d4e7a1;">
+                    <!--// TODO: should change with user profile photo!-->
+                    <span class="user-icon"><i class="fa fa-user-circle" aria-hidden="true"></i></span>
+                </div>
+
+                <div class="user-card-info">
+                    <div class="user-name">
+                        <div class="user-fName">@item.User.FirstName.ToUpper()</div>
+                        <div class="user-lName">@item.User.LastName.ToUpper()</div>
+                    </div>
+
+                    <div class="user-username"> @atSign@item.User.Username</div>
+
+                    <div class="user-card-song-and-btn">
+                        <div class="user-song-counter">
+                            Songs: @context.Songs.Where(x => x.OwnerId == item.User.Id).Count()<span></span>
+                        </div>
+                        <div class="user-song-counter">
+                            PLs: @context.Playlists.Where(x => x.OwnerId == item.User.Id).Count()
+                        </div>
+                        <div class="user-card-btn-outer">
+                            <a class="user-card-btn revoke-user" href="/Songs/RevokeShare?id=@item.Id"
+                               onclick="return confirm('Revoke Access?')">Revoke</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+
     }
 
 </div>
