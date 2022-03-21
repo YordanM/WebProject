@@ -187,17 +187,18 @@ namespace WebProject.Controllers
         public IActionResult Share(ShareVM model)
         {
             WebProjectDbContext context = new WebProjectDbContext();
-
-            foreach (int userId in model.UserIds)
+            if(model.UserIds != null)
             {
-                UserToSong item = new UserToSong();
-                item.UserId = userId;
-                item.SongId = model.SongId;
+                foreach (int userId in model.UserIds)
+                {
+                    UserToSong item = new UserToSong();
+                    item.UserId = userId;
+                    item.SongId = model.SongId;
 
-                context.UserToSongs.Add(item);
-                context.SaveChanges();
+                    context.UserToSongs.Add(item);
+                    context.SaveChanges();
+                }
             }
-
             return RedirectToAction("Share", "Songs", new { Id = model.SongId });
         }
 
