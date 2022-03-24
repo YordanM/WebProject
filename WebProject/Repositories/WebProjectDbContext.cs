@@ -12,14 +12,17 @@ namespace WebProject.Repositories
         public DbSet<User> Users { get; set; }
         public DbSet<Song> Songs { get; set; }
         public DbSet<Playlist> Playlists { get; set; }
+        public DbSet<Comment> Comments { get; set; }
         public DbSet<SongToPlaylist> SongToPlaylists { get; set; }
         public DbSet<UserToSong> UserToSongs { get; set; }
 
+        
         public WebProjectDbContext()
         {
             this.Users = this.Set<User>();
             this.Songs = this.Set<Song>();
             this.Playlists = this.Set<Playlist>();
+            this.Comments = this.Set<Comment>();
             this.SongToPlaylists = this.Set<SongToPlaylist>();
             this.UserToSongs = this.Set<UserToSong>();
         }
@@ -27,7 +30,7 @@ namespace WebProject.Repositories
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder
-                .UseSqlServer(@"Server=DESKTOP-6157GQF\SQLEXPRESS;Database=WebProjectDB;Trusted_Connection=True;")
+                .UseSqlServer(@"Server=(LocalDb)\LocalDB;Database=WebProjectDB;Trusted_Connection=True;")
                 .UseLazyLoadingProxies();
         }
 

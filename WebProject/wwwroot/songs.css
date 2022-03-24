@@ -3,6 +3,81 @@
     
 }
 
+.comment-section {
+    width: 30%;
+    font-size: 14px;
+    height: 100%;
+    background: linear-gradient(180deg, #ffffffba, #41829f30);
+    color: black;
+    padding: 3%;
+    padding-top: 0;
+    font-family: 'Source Sans 3', sans-serif;
+    overflow: scroll;
+    overflow-x: hidden;
+    box-shadow: 0px 3px 3px rgb(0 0 0 / 38%);
+}
+
+.playlist-context-and-comments {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start;
+}
+
+.add-comment {
+    background-color: #ffffff78;
+    border-radius: 10px;
+    padding: 5px;
+    margin-top: 10px;
+}
+.comment-label-textarea{
+    width:100%;
+}
+.comment-label-textarea textarea{
+    width: 100%;
+}
+.comment-error p {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: red;
+    background-color: floralwhite;
+    padding: 0 3px;
+    border-color: red;
+    border: 0.2px solid;
+}
+
+.comment-send {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+}
+
+.comments{
+
+}
+.comment-card {
+    background-color: floralwhite;
+    padding: 5px;
+    border: 1px solid antiquewhite;
+    border-radius: 0 10px 15px 10px;
+    margin: 3% 0;
+}
+
+
+.comment-card em {
+    color: #555555;
+    font-size: 80%;
+}
+.comment-text {
+    font-size: 90%;
+}
+
+.comment-footer {
+    color: #3a53e4;
+    font-size: 80%;
+    text-align: right;
+    padding-right: 3px;
+}
+
 .sg-grid {
     font-size: 14px;
     height: 60%;

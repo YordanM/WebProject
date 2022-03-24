@@ -20,8 +20,8 @@ namespace WebProject.Controllers
 
             IndexVM model = new IndexVM();
             model.Items = context.Playlists.ToList();
-            model.Items = context.Playlists.Where(p => p.OwnerId == loggedUser.Id).ToList();
-
+           // model.Items = context.Playlists.Where(p => p.OwnerId == loggedUser.Id).ToList();
+           
             return View(model);
         }
 
@@ -65,7 +65,52 @@ namespace WebProject.Controllers
             return RedirectToAction("Index", "Playlists");
         }
 
-        [HttpGet]
+        [HttpPost]
+        public IActionResult AddComment(ContextVM model)
+        {
+            WebProjectDbContext context = new WebProjectDbContext();
+
+            User loggedUser = this.HttpContext.Session.GetObject<User>("loggedUser");
+
+            Comment comment = new Comment();
+            comment.PlaylistId = model.Playlist.Id;
+            comment.OwnerId = loggedUser.Id;
+            comment.Text = model.AddComment;
+
+            
+            context.Comments.Add(comment);
+            context.SaveChanges();
+            return RedirectToAction("Index", "Playlists");
+        }
+
+        public IActionResult RemoveComment(int id)
+        {
+            User loggedUser = this.HttpContext.Session.GetObject<User>("loggedUser");
+
+            WebProjectDbContext context = new WebProjectDbContext();
+
+
+            Comment item = context.Comments.Where(u => u.Id == id).FirstOrDefault();
+
+            if (item == null)
+            {
+                return RedirectToAction("Index", "Playlists");
+            }
+
+            if (item.OwnerId != loggedUser.Id)
+            {
+                return RedirectToAction("Index", "Playlists");
+            }
+
+            context.Comments.Remove(item);
+            context.SaveChanges();
+
+            return RedirectToAction("Index", "Playlists");
+        }
+
+
+
+       [HttpGet]    
         public IActionResult Context(int id)
         {
 
@@ -84,6 +129,7 @@ namespace WebProject.Controllers
             model.PlaylistId = id;
             model.Songs = availableSongs;
             model.Playlist = context.Playlists.Where(pl => pl.Id == id).FirstOrDefault();
+            model.Comments = context.Comments.Where(cm => cm.PlaylistId == id).ToList();
             return View(model);
         }
 
@@ -93,9 +139,16 @@ namespace WebProject.Controllers
         {
             WebProjectDbContext context = new WebProjectDbContext();
 
+            User loggedUser = this.HttpContext.Session.GetObject<User>("loggedUser");
+
             SongToPlaylist item = context.SongToPlaylists.Where(x => x.SongId == model.SongId).FirstOrDefault();
 
             if (item == null)
+            {
+                return RedirectToAction("Index", "Playlists");
+            }
+
+            if (item.Playlist.OwnerId != loggedUser.Id)
             {
                 return RedirectToAction("Index", "Playlists");
             }
@@ -154,7 +207,7 @@ namespace WebProject.Controllers
                 return RedirectToAction("Index", "Playlists");
             }
 
-            if (item.Id != loggedUser.Id)
+            if (item.OwnerId != loggedUser.Id)
             {
                 return RedirectToAction("Index", "Playlists");
             }
@@ -179,7 +232,7 @@ namespace WebProject.Controllers
                 return RedirectToAction("Index", "Playlists");
             }
 
-            if (item.Id != loggedUser.Id)
+            if (item.OwnerId != loggedUser.Id)
             {
                 return RedirectToAction("Index", "Playlists");
             }
@@ -187,7 +240,7 @@ namespace WebProject.Controllers
             EditVM model = new EditVM();
             model.Id = item.Id;
             model.Name = item.Name;
-            item.OwnerId = model.OwnerId;
+            model.OwnerId = item.OwnerId;
 
             return View(model);
         }
@@ -195,7 +248,6 @@ namespace WebProject.Controllers
         [HttpPost]
         public IActionResult Edit(EditVM model)
         {
-
             WebProjectDbContext context = new WebProjectDbContext();
 
             if (!ModelState.IsValid)
@@ -204,12 +256,17 @@ namespace WebProject.Controllers
             Playlist item = new Playlist();
             item.Id = model.Id;
             item.Name = model.Name;
-            item.OwnerId = model.OwnerId + 1;
+            item.OwnerId = model.OwnerId;
 
             context.Playlists.Update(item);
             context.SaveChanges();
 
             return RedirectToAction("Index", "Playlists");
         }
+
+       
     }
+
+
+
 }

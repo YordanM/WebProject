@@ -46,14 +46,24 @@
                 <a class="pl-col-2-cntxt" href="/Playlists/Context?id=@item.Id"> @item.Name</a>
             </div>
            
-            <div class="pl-col-3">@countOfSongs</div>
+            <div class="pl-col-3" style="text-align:center;">@countOfSongs</div>
             <div class="pl-col-4">
-                    <div class="pl-options">
+                <div class="pl-options">
+
+                    @if (loggedUser.Id == item.OwnerId)
+                    {
                         <a href="/Playlists/AddSong?id=@item.Id"><i class="fa fa-plus-square" aria-hidden="true"></i></a>
                         <a href="/Playlists/Edit?id=@item.Id"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                         <a href="/Playlists/Delete?id=@item.Id"
                            onclick="return confirm('Delete Record?')"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                    </div>
+                    }
+                    else
+                    {
+                        <em style="color: #b4b4b4;">@atSign@item.Owner.Username</em>
+                    }
+
+
+                </div>
                 
               
             </div>
