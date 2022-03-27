@@ -1,11 +1,13 @@
 ﻿@model WebProject.ViewModels.Users.IndexVM
 @using WebProject.Entities
+@using WebProject.ExtentionMethods
 @using WebProject.Repositories
 @{
     this.Layout = "/Views/Shared/_Site.cshtml";
-    ViewData["title"] = "USERS";
+    ViewData["title"] = "Authors";
     string atSign = "@";
-    
+    User loggedUser = this.ViewContext.HttpContext.Session.GetObject<User>("loggedUser");
+
     WebProjectDbContext context = new WebProjectDbContext();
 
 
@@ -20,34 +22,46 @@
 <div class="users-main-content">
     @foreach (User item in Model.Items)
     {
-    <div class="user-card">
-        <div class="user-card-img">
-            <!--// TODO: should change with user profile photo!-->
-            <span class="user-icon"><i class="fa fa-user-circle" aria-hidden="true"></i></span>
-        </div>
         
-        <div class="user-card-info">
-            <div class="user-name">
-                <div class="user-fName">@item.FirstName.ToUpper()</div>
-                <div class="user-lName">@item.LastName.ToUpper()</div>
+        <div class="user-card">
+            <div class="user-card-img">
+                <!--// TODO: should change with user profile photo!-->
+                <span class="user-icon"><i class="fa fa-user-circle" aria-hidden="true"></i></span>
             </div>
 
-            <div class="user-username"> @atSign@item.Username</div>
-            
-            <div class="user-card-song-and-btn">
-                <div class="user-song-counter">
-                    Songs: @context.Songs.Where(x => x.OwnerId == item.Id).Count()<span></span>
+            <div class="user-card-info">
+                <div class="user-name">
+                    <div class="user-fName">@item.FirstName.ToUpper()</div>
+                    <div class="user-lName">@item.LastName.ToUpper()</div>
                 </div>
-                <div class="user-song-counter">
-                    PLs: @context.Playlists.Where(x => x.OwnerId == item.Id).Count()
-                </div>
-                <div class="user-card-btn-outer">
-                    <button class="user-card-btn">See</button>
+
+                <div class="user-username"> @atSign@item.Username</div>
+
+                <div class="user-card-song-and-btn">
+                    <div class="user-song-counter">
+                        Songs: @context.Songs.Where(x => x.OwnerId == item.Id).Count()<span></span>
+                    </div>
+                    <div class="user-song-counter">
+                        PLs: @context.Playlists.Where(x => x.OwnerId == item.Id).Count()
+                    </div>
+                    <div class="user-card-btn-outer">
+                        @if (loggedUser.Id == item.Id)
+                        {   
+                                <a href="/Users/Edit?id=@item.Id" style="color: black; text-decoration: none; font-size: 130%;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                <a href="/Users/Delete?id=@item.Id" style="color: darkred; text-decoration: none; font-size: 130%"
+                                   onclick="return confirm('You sure that you want to delete your account?')"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                           
+                        }
+                        else
+                        {
+                             <button class="user-card-btn">See</button>
+                        }
+                            
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    }
+}
 </div>
- 
-   
+
+

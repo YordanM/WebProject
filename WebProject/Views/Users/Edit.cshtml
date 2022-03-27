@@ -4,62 +4,79 @@
     ViewData["title"] = "EDIT USERS";
 }
 
-<fieldset>
-    <legend>EDIT USER</legend>
-    <form action="/Users/Edit" method="post">
-        @Html.HiddenFor(m => m.Id)
-        <div class="grid">
-            <div class="row">
-                <div class="col-1">
-                    @Html.LabelFor(m => m.Username)
+<head>
+    <link href="~/create-edit-song.css" rel="stylesheet" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+          integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=League+Spartan:wght@200&family=Open+Sans:wght@300&family=Source+Sans+3:wght@500&display=swap" rel="stylesheet">
+</head>
+
+<div class="sg-content" style="height: auto;">
+    <fieldset>
+        <legend>Edit Profile Details</legend>
+        <form action="/Users/Edit" method="post">
+            @Html.HiddenFor(m => m.Id)
+            <div class="sg-form-inner">
+                <div class="sg-input">
+                    <div class="col-1">
+                        @Html.LabelFor(m => m.Username)
+                    </div>
+                    <div class="col-2">
+                        @Html.TextBoxFor(m => m.Username)
+                    </div>
+                    <div class="col-2">
+                        @Html.ValidationMessageFor(m => m.Username)
+                    </div>
                 </div>
-                <div class="col-2">
-                    @Html.TextBoxFor(m => m.Username)
+                <div class="sg-input">
+                    <div class="col-1">
+                        @Html.LabelFor(m => m.Password)
+                    </div>
+                    <div class="col-2">
+                        @Html.PasswordFor(m => m.Password)
+                    </div>
+                    <div class="col-2">
+                        @Html.ValidationMessageFor(m => m.Password)
+                    </div>
                 </div>
-                <div class="col-2">
-                    @Html.ValidationMessageFor(m => m.Username)
+                <div class="sg-input">
+                    <div class="col-1">
+                        @Html.LabelFor(m => m.FirstName)
+                    </div>
+                    <div class="col-2">
+                        @Html.TextBoxFor(m => m.FirstName)
+                    </div>
+                    <div class="col-2">
+                        @Html.ValidationMessageFor(m => m.FirstName)
+                    </div>
                 </div>
+                <div class="sg-input">
+                    <div class="col-1">
+                        @Html.LabelFor(m => m.LastName)
+                    </div>
+                    <div class="col-2">
+                        @Html.TextBoxFor(m => m.LastName)
+                    </div>
+                    <div class="col-2">
+                        @Html.ValidationMessageFor(m => m.LastName)
+                    </div>
+                </div>
+
             </div>
-            <div class="row">
-                <div class="col-1">
-                    @Html.LabelFor(m => m.Password)
-                </div>
-                <div class="col-2">
-                    @Html.PasswordFor(m => m.Password)
-                </div>
-                <div class="col-2">
-                    @Html.ValidationMessageFor(m => m.Password)
-                </div>
+
+            <div>
+                @Html.ValidationMessage("summaryError")
             </div>
-            <div class="row">
-                <div class="col-1">
-                    @Html.LabelFor(m => m.FirstName)
-                </div>
-                <div class="col-2">
-                    @Html.TextBoxFor(m => m.FirstName)
-                </div>
-                <div class="col-2">
-                    @Html.ValidationMessageFor(m => m.FirstName)
-                </div>
+
+            <div class="sg-btns">
+                <input type="submit" id="sg-save" value="Save" />
+                <a  id="sg-back" href="/Users/Index" >Back</a>
             </div>
-            <div class="row">
-                <div class="col-1">
-                    @Html.LabelFor(m => m.LastName)
-                </div>
-                <div class="col-2">
-                    @Html.TextBoxFor(m => m.LastName)
-                </div>
-                <div class="col-2">
-                    @Html.ValidationMessageFor(m => m.LastName)
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-1"></div>
-                <div class="col-2">
-                    <input type="submit" class="right" value="Save" />
-                    <a href="/Users/Index" class="right">Back</a>
-                </div>
-            </div>
-        </div>
-    </form>
-</fieldset>
+        </form>
+    </fieldset>
+</div>

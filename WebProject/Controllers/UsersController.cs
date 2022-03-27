@@ -17,7 +17,7 @@ namespace WebProject.Controllers
         public IActionResult Index()
         {
             WebProjectDbContext context = new WebProjectDbContext();
-
+            
             IndexVM model = new IndexVM();
             model.Items = context.Users.ToList();
 
@@ -90,7 +90,7 @@ namespace WebProject.Controllers
 
             if (!ModelState.IsValid)
                 return View(model);
-
+            
             User item = new User();
             item.Id = model.Id;
             item.Username = model.Username;
