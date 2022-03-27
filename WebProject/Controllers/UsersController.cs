@@ -73,7 +73,9 @@ namespace WebProject.Controllers
             context.Users.Remove(item);
             context.SaveChanges();
 
-            return RedirectToAction("Index", "Users");
+            HttpContext.Session.Remove("loggedUser");
+
+            return RedirectToAction("Login", "Home");
         }
 
         [HttpGet]
