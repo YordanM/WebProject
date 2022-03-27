@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebProject.Repositories;
 
 namespace WebProject.Migrations
 {
     [DbContext(typeof(WebProjectDbContext))]
-    partial class WebProjectDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220327135542_UnknownUser")]
+    partial class UnknownUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

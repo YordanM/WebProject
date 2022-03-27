@@ -17,9 +17,11 @@ namespace WebProject.Controllers
         public IActionResult Index()
         {
             WebProjectDbContext context = new WebProjectDbContext();
-            
+
+            User unknownUser = context.Users.FirstOrDefault(x => x.Username == "unknown");
+
             IndexVM model = new IndexVM();
-            model.Items = context.Users.ToList();
+            model.Items = context.Users.Where(u => u.Id != unknownUser.Id).ToList();
 
             return View(model);
         }
@@ -38,6 +40,11 @@ namespace WebProject.Controllers
 
             User item = context.Users.Where(u => u.Id == id).FirstOrDefault();
 
+            User unknownUser = context.Users.FirstOrDefault(x => x.Username == "unknown");
+
+            List<Song> songs = context.Songs.Where(s => s.OwnerId == id).ToList();
+            List<Playlist> playlists = context.Playlists.Where(p => p.OwnerId == id).ToList();
+
             if (item == null)
             {
                 return RedirectToAction("Index", "Users");
@@ -46,6 +53,21 @@ namespace WebProject.Controllers
             if (item.Id != loggedUser.Id)
             {
                 return RedirectToAction("Index", "Users");
+            }
+
+            if (unknownUser.Id == item.Id)
+            {
+                return RedirectToAction("Index", "Users");
+            }
+
+            foreach (var song in songs)
+            {
+                song.OwnerId = unknownUser.Id;
+            }
+
+            foreach (var playlist in playlists)
+            {
+                playlist.OwnerId = unknownUser.Id;
             }
 
             context.Users.Remove(item);

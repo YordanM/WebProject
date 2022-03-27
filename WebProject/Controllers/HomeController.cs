@@ -34,16 +34,18 @@ namespace ProjectManagement.Controllers
 
             WebProjectDbContext context = new WebProjectDbContext();
 
+            User unknownUser = context.Users.FirstOrDefault(x => x.Username == "unknown");
+
             User loggedUser = context.Users.Where(u => u.Username == model.Username &&
-                                                       u.Password == model.Password)
+                                                       u.Password == model.Password &&
+                                                       u.Id != unknownUser.Id)
                                            .FirstOrDefault();
+
             if (loggedUser == null)
             {
                 this.ModelState.AddModelError("authError", "Invalid username or password!");
                 return View(model);
             }
-
-           
 
             HttpContext.Session.SetObject("loggedUser", loggedUser);
 

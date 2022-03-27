@@ -168,17 +168,20 @@ namespace WebProject.Controllers
         {
             WebProjectDbContext context = new WebProjectDbContext();
 
+            User unknownUser = context.Users.FirstOrDefault(x => x.Username == "unknown");
+
             ShareVM model = new ShareVM();
             model.Song = context.Songs.Where(p => p.Id == id).FirstOrDefault();
 
             model.Shares = context.UserToSongs.Where(i => i.SongId == id).ToList();
 
-            List<int> usersSheredList = model.Shares.Select(i => i.UserId).ToList();
+            List<int> usersSheredList = model.Shares
+                .Select(i => i.UserId).ToList();
 
 
 
             usersSheredList.Add(model.Song.OwnerId);
-            model.Users = context.Users.Where(i => !usersSheredList.Contains(i.Id)).ToList();
+            model.Users = context.Users.Where(i => !usersSheredList.Contains(i.Id) && i.Id != unknownUser.Id).ToList();
 
             return View(model);
         }

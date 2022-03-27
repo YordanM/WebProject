@@ -30,7 +30,7 @@ namespace WebProject.Repositories
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder
-                .UseSqlServer(@"Server=(LocalDb)\LocalDB;Database=WebProjectDB;Trusted_Connection=True;")
+                .UseSqlServer(@"Server=DESKTOP-6157GQF\SQLEXPRESS;Database=WebProjectDB;Trusted_Connection=True;")
                 .UseLazyLoadingProxies();
         }
 
@@ -44,7 +44,16 @@ namespace WebProject.Repositories
                     Password = "iordan",
                     FirstName = "iordan",
                     LastName = "mitrev"
-                });
+                },
+                new User()
+                {
+                    Id = 2,
+                    Username = "unknown",
+                    Password = "unknown",
+                    FirstName = "unknown",
+                    LastName = "unknown"
+                }
+                );
         }
     }
 }
